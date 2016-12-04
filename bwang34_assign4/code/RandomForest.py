@@ -3,15 +3,15 @@ import numpy as np
 from tree import *
 import random
 
-# python RandomForest.py ../data/balance-scale.train ../data/balance-scale.test
-# python RandomForest.py ../data/nursery.data.train ../data/nursery.data.test
-# python RandomForest.py ../data/led.train.new ../data/led.test.new
-# python RandomForest.py ../data/poker.train ../data/poker.test
+# time python RandomForest.py ../data/balance-scale.train ../data/balance-scale.test
+# time python RandomForest.py ../data/nursery.data.train ../data/nursery.data.test
+# time python RandomForest.py ../data/led.train.new ../data/led.test.new
+# time python RandomForest.py ../data/poker.train ../data/poker.test
 
 TRAIN = sys.argv[1]
 TEST = sys.argv[2]
 SAMPLE = 0.5
-TREE = 50
+TREE = 200
 
 def read_train():
 	data = []
@@ -82,6 +82,11 @@ def calculate_confusion_matrix(num, labels, labels_predicted):
 			correct += 1
 	return confusion_matrix, correct
 
+def print_confusion_matrix(confusion_matrix):
+	for row in confusion_matrix:
+		string = [str(int(x)) for x in row]
+		print ' '.join(string)
+
 if __name__ == '__main__':
 	data, class_num = read_train()
 	test, data_num, labels = read_test()
@@ -96,6 +101,7 @@ if __name__ == '__main__':
 				output[j][label] = 0
 			output[j][label] += 1
 	confusion_matrix, correct = calculate_confusion_matrix(class_num, labels, output)
-	print confusion_matrix
+	# print confusion_matrix
+	print_confusion_matrix(confusion_matrix)
 	print 'accuracy: {}'.format(float(correct)/float(data_num))
 

@@ -66,12 +66,17 @@ def calculate_confusion_matrix(num, label_pair):
 		confusion_matrix[int(pair[0])-1][int(pair[1])-1] += 1
 	return confusion_matrix
 
+def print_confusion_matrix(confusion_matrix):
+	for row in confusion_matrix:
+		string = [str(int(x)) for x in row]
+		print ' '.join(string)
+
 if __name__ == '__main__':
 	data, class_num = read_train()
 	test, data_num = read_test()
 	decision_tree = tree(data, 'DT')
 	correct_num, label_pair = decision_tree.test(test)
 	confusion_matrix = calculate_confusion_matrix(class_num, label_pair)
-	print confusion_matrix
-	# print 'accuracy: {}'.format(float(correct_num)/float(data_num))
+	print_confusion_matrix(confusion_matrix)
+	print 'accuracy: {}'.format(float(correct_num)/float(data_num))
 
