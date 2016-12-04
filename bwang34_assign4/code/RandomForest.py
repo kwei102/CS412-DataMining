@@ -101,7 +101,5 @@ if __name__ == '__main__':
 				output[j][label] = 0
 			output[j][label] += 1
 	confusion_matrix, correct = calculate_confusion_matrix(class_num, labels, output)
-	# print confusion_matrix
 	print_confusion_matrix(confusion_matrix)
-	print 'accuracy: {}'.format(float(correct)/float(data_num))
-
+	# print 'accuracy: {}'.format(float(correct)/float(data_num))

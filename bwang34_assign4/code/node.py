@@ -21,7 +21,7 @@ class node(object):
 		# children
 		self.children = {}
 		self.connection = {}
-		
+		# helper functions
 		self.construct()
 		if self.is_leaf is False:
 			self.gini_split()
@@ -113,32 +113,3 @@ class node(object):
 			if target_group not in self.children:
 				self.children[target_group] = []
 			self.children[target_group].append(record_output)
-
-
-
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

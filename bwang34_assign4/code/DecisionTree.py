@@ -78,5 +78,4 @@ if __name__ == '__main__':
 	correct_num, label_pair = decision_tree.test(test)
 	confusion_matrix = calculate_confusion_matrix(class_num, label_pair)
 	print_confusion_matrix(confusion_matrix)
-	print 'accuracy: {}'.format(float(correct_num)/float(data_num))
-
+	# print 'accuracy: {}'.format(float(correct_num)/float(data_num))

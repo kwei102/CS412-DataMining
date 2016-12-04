@@ -49,11 +49,4 @@ class tree(object):
 		if self.type == 'DT':
 			return correct, label_pair
 		else:
-			return labels
-
-
-
-
-
-
-		
+			return labels	
