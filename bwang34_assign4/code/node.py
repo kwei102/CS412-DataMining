@@ -1,10 +1,11 @@
-import operator
-
+import random
+import math
 
 class node(object):
 	"""docstring for node"""
-	def __init__(self, data):
+	def __init__(self, data, tree_type):
 		self.data = data
+		self.type = tree_type
 		# leaf
 		self.is_leaf = False
 		self.label = None
@@ -70,17 +71,32 @@ class node(object):
 			self.label = self.label_set.pop()
 
 	def gini_split(self):
-		for attr in self.table.keys():
-			attr_freq = self.attr_num[attr]
-			if attr not in self.gini:
-				self.gini[attr] = 0
-			for value in self.table[attr].keys():
-				value_freq = self.value_num[(attr, value)]
-				gini = 1.0
-				for label in self.table[attr][value]:
-					p = float(self.label_num[(attr,value,label)])/float(self.value_num[(attr,value)])
-					gini -= p*p
-				self.gini[attr] += (float(value_freq)/float(attr_freq))*gini
+		if self.type == 'DT':
+			for attr in self.table.keys():
+				attr_freq = self.attr_num[attr]
+				if attr not in self.gini:
+					self.gini[attr] = 0
+				for value in self.table[attr].keys():
+					value_freq = self.value_num[(attr, value)]
+					gini = 1.0
+					for label in self.table[attr][value]:
+						p = float(self.label_num[(attr,value,label)])/float(self.value_num[(attr,value)])
+						gini -= p*p
+					self.gini[attr] += (float(value_freq)/float(attr_freq))*gini
+		else:
+			attrs = self.table.keys()
+			attrs = random.sample(attrs, int(math.ceil(math.sqrt(len(attrs)))))
+			for attr in attrs:
+				attr_freq = self.attr_num[attr]
+				if attr not in self.gini:
+					self.gini[attr] = 0
+				for value in self.table[attr].keys():
+					value_freq = self.value_num[(attr, value)]
+					gini = 1.0
+					for label in self.table[attr][value]:
+						p = float(self.label_num[(attr,value,label)])/float(self.value_num[(attr,value)])
+						gini -= p*p
+					self.gini[attr] += (float(value_freq)/float(attr_freq))*gini
 
 	def split_child(self):
 		self.attribute = sorted(self.gini, key=self.gini.get)[0]
