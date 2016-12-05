@@ -42,7 +42,6 @@ def sensitivity(table):
 		print float(table[i][i])/float(sum(table[i]))
 	print '\n'
 
-
 def specificity(table):
 	print 'specificity'
 	for i in range(length):
